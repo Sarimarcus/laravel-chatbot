@@ -14,7 +14,6 @@ class Chatbot extends Controller
 
         // Facebook webhook verification
         $chatbotHelper->verifyWebhook($_REQUEST);
-        Log::error('Request: '.$_REQUEST);
 
         // Get the fb users data
         $input = json_decode(file_get_contents('php://input'), true);
@@ -24,7 +23,7 @@ class Chatbot extends Controller
 
             // Get the user's message
             $message = $chatbotHelper->getMessage($input);
-            Log::error('Message: '.$message);
+            \Log::error('Message: '.$message);
 
             // Example 1: Get a static message back
             $replyMessage = $chatbotHelper->getAnswer($message);
@@ -43,6 +42,6 @@ class Chatbot extends Controller
             // Send the answer back to the Facebook chat
             $chatbotHelper->send($senderId, $replyMessage);
 
-        }
+        } else \Log::error('Error');
     }
 }
