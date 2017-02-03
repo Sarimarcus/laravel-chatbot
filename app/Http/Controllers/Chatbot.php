@@ -11,8 +11,6 @@ class Chatbot extends Controller
     {
         // Create the chatbot helper instance
         $chatbotHelper = new ChatbotHelper();
-        \Log::error('log.');
-
 
         // Facebook webhook verification
         $chatbotHelper->verifyWebhook($_REQUEST);
