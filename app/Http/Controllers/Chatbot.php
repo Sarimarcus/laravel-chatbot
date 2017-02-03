@@ -25,7 +25,7 @@ class Chatbot extends Controller
             $message = $chatbotHelper->getMessage($input);
 
             // Example 1: Get a static message back
-            //$replyMessage = $chatbotHelper->getAnswer($message);
+            // $replyMessage = $chatbotHelper->getAnswer($message);
 
             // Example 2: Get foreign exchange rates
             // $replyMessage = $chatbotHelper->getAnswer($message, 'rates');
