@@ -11,6 +11,8 @@ class Chatbot extends Controller
 {
     public function index()
     {
+        error_log("hello, this is a test!");
+
         // Create the chatbot helper instance
         $chatbotHelper = new ChatbotHelper();
 
