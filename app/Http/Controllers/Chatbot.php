@@ -4,25 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Classes\ChatbotHelper;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 
 class Chatbot extends Controller
 {
     public function index()
     {
-        error_log("hello, this is a test!");
-
         // Create the chatbot helper instance
         $chatbotHelper = new ChatbotHelper();
+        \Log::error('log.');
+
 
         // Facebook webhook verification
         $chatbotHelper->verifyWebhook($_REQUEST);
-
-        $log = new Logger('name');
-        $log->pushHandler(new StreamHandler('php://stderr', Logger::WARNING));
-
-        $log->addWarning('Foo');
 
         // Get the fb users data
         $input = json_decode(file_get_contents('php://input'), true);
@@ -32,7 +25,6 @@ class Chatbot extends Controller
 
             // Get the user's message
             $message = $chatbotHelper->getMessage($input);
-            \Log::error('Message: '.$message);
 
             // Example 1: Get a static message back
             $replyMessage = $chatbotHelper->getAnswer($message);
@@ -51,6 +43,6 @@ class Chatbot extends Controller
             // Send the answer back to the Facebook chat
             $chatbotHelper->send($senderId, $replyMessage);
 
-        } else \Log::error('Error');
+        }
     }
 }
