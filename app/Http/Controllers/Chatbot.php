@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Classes\ChatbotHelper;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class Chatbot extends Controller
 {
@@ -14,6 +16,11 @@ class Chatbot extends Controller
 
         // Facebook webhook verification
         $chatbotHelper->verifyWebhook($_REQUEST);
+
+        $log = new Logger('name');
+        $log->pushHandler(new StreamHandler('php://stderr', Logger::WARNING));
+
+        $log->addWarning('Foo');
 
         // Get the fb users data
         $input = json_decode(file_get_contents('php://input'), true);
