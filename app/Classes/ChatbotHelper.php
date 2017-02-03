@@ -18,8 +18,6 @@ class ChatbotHelper
 
     public function __construct()
     {
-        $dotenv = new Dotenv(dirname(__FILE__, 2));
-        $dotenv->load();
         $this->accessToken = getenv('PAGE_ACCESS_TOKEN');
         $this->config = include('config.php');
         $this->chatbotAI = new ChatbotAI($this->config);

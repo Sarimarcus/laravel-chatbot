@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/', 'Chabot@index');
+Route::get('/', 'Chatbot@index');
