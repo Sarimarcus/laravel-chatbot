@@ -6,6 +6,7 @@ namespace App\Classes;
 use ApiAi\Client;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Illuminate\Http\Request;
 
 class ChatbotAI
 {
@@ -57,7 +58,7 @@ class ChatbotAI
 
             $query = $this->apiClient->get('query', [
                 'query' => $message,
-                'sessionId' => substr( md5(rand()), 0, 36)
+                'sessionId' => session('_token')
             ]);
 
             $response = json_decode((string)$query->getBody(), true);
