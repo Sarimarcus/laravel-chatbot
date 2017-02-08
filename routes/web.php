@@ -12,3 +12,4 @@
 */
 
 Route::post('/', 'Chatbot@index');
+Route::get('/', 'Chatbot@index');
