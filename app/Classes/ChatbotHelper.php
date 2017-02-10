@@ -78,11 +78,11 @@ class ChatbotHelper
     /**
      * Send a reply back to Facebook chat
      * @param $senderId
-     * @param $replyMessage
+     * @param $data
      */
-    public function send($senderId, string $replyMessage)
+    public function send($senderId, $data)
     {
-        return $this->facebookSend->send($this->accessToken, $senderId, $replyMessage);
+        return $this->facebookSend->send($this->accessToken, $senderId, $data);
     }
 
     /**
