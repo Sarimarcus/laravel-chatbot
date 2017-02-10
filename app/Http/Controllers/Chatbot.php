@@ -33,6 +33,7 @@ class Chatbot extends Controller
             // Example 3: If you want to use a bot platform like api.ai
             // Don't forget to place your Api.ai Client access token in the .env file
             $replyMessage = $chatbotHelper->getAnswer($message, 'apiai');
+            Log::info('msg : ' . $message . ' / replyMsg' . $replyMessage);
 
             // Example 4: If you want to use a bot platform like wit.ai
             // Don't forget to place your Wit.ai Client access token in the .env file (WITAI_TOKEN)
