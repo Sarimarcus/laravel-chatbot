@@ -7,6 +7,7 @@ use ApiAi\Client;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ChatbotAI
 {
