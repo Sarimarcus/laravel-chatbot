@@ -55,7 +55,7 @@ class ChatbotAI
 
             $query = $this->apiClient->get('query', [
                 'query' => $message,
-                'sessionId' => session('_token')
+                'sessionId' => substr(session('_token'),0 , 36)
             ]);
 
             $response = json_decode((string)$query->getBody(), true);

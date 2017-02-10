@@ -12,4 +12,8 @@
 */
 
 Route::post('/', 'Chatbot@index');
+
+/*
+  For Facebook Webhook verification
+ */
 Route::get('/', 'Chatbot@index');
