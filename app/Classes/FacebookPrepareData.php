@@ -8,10 +8,11 @@ class FacebookPrepareData
     /**
      * Create JSON data for the play to facebook
      * @param $senderId
-     * @param $data
+     * @param $content
+     * @param $type
      * @return string
      */
-    public function prepare($senderId, $data)
+    public function prepare($senderId, $content, $type)
     {
 
         $header =  '{
@@ -21,16 +22,16 @@ class FacebookPrepareData
 
 
         // Just a plain text response
-        if(is_string($data))
+        if('plaintext' == $type)
         {
             $message = '"message":{
                 "text":"' . $data . '"
             }';
         // If we have a formatted response
-        } else if(is_array($data))
+        if('formatted' == $type)
         {
             $message = '"message":
-                ' . json_encode($data) . '
+                ' . $data . '
             ';
         }
 

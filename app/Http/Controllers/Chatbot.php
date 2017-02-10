@@ -18,6 +18,7 @@ class Chatbot extends Controller
 
         // Get the fb users data
         $input = json_decode(file_get_contents('php://input'), true);
+
         $senderId = $chatbotHelper->getSenderId($input);
 
         if ($senderId && $chatbotHelper->isMessage($input)) {
@@ -30,7 +31,7 @@ class Chatbot extends Controller
             $data = $chatbotHelper->getAnswer($message, 'apiai');
 
             // Send the answer back to the Facebook chat
-            $chatbotHelper->send($senderId, $data);
+            $chatbotHelper->send($senderId, $data['content'], $data['type']);
         }
     }
 }

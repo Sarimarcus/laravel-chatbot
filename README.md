@@ -7,7 +7,7 @@ Add domain to whitelist :
 ```
 curl -X POST -H "Content-Type: application/json" -d '{
   "setting_type" : "domain_whitelisting",
-  "whitelisted_domains" : ["https://placekitten.com"],
+  "whitelisted_domains" : ["http://www.get-the-look.fr"],
   "domain_action_type": "add"
 }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=PAGE_ACCESS_TOKEN"
 ```

@@ -19,13 +19,14 @@ class FacebookSend
     /**
      * @param string $accessToken
      * @param string $senderId
-     * @param $data
+     * @param $content
+     * @param $type
      * @internal param string $jsonDataEncoded
      */
-    public function send(string $accessToken, string $senderId, $data)
+    public function send(string $accessToken, string $senderId, $content, $type)
     {
 
-        $jsonDataEncoded = $this->facebookPrepareData->prepare($senderId, $data);
+        $jsonDataEncoded = $this->facebookPrepareData->prepare($senderId, $content, $type);
 
         Log::info('Sending JSON to Facebook : ' . $jsonDataEncoded);
 
