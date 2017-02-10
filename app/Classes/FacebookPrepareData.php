@@ -29,9 +29,9 @@ class FacebookPrepareData
         // If we have a formatted response
         } else if(is_array($data))
         {
-            $message = '"message":{
+            $message = '"message":
                 ' . json_encode($data) . '
-            }';
+            ';
         }
 
         $footer = '
