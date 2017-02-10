@@ -26,10 +26,11 @@ class FacebookPrepareData
             $message = '"message":{
                 "text":"' . $data . '"
             }';
+        // If we have a formatted response
         } else if(is_array($data))
         {
             $message = '"message":{
-                "attachement":"' . json_encode($data) . '"
+                ' . json_encode($data) . '
             }';
         }
 
