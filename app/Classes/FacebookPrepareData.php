@@ -25,12 +25,12 @@ class FacebookPrepareData
         if('plaintext' == $type)
         {
             $message = '"message":{
-                "text":"' . $data . '"
+                "text":"' . $content . '"
             }';
         // If we have a formatted response
         }elseif('formatted' == $type)
         {
-            $message = '"message": ' . $data;
+            $message = '"message": ' . $content;
         }
 
         $footer = '
