@@ -61,6 +61,10 @@ class ChatbotAI
                 'sessionId' => session('_token')
             ]);
 
+            Log::info('token : ' . session('_token'));
+            dd($query);
+
+
             $response = json_decode((string)$query->getBody(), true);
 
             return $response['result']['fulfillment']['speech'];
