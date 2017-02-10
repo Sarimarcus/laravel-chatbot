@@ -23,8 +23,8 @@ class ChatbotAI
     {
         $this->config = $config;
         $this->apiClient = new Client($this->config['apiai_token'], null, 'fr');
-        $this->witClient = new \Tgallice\Wit\Client($this->config['witai_token']);
-        $this->foreignExchangerate = new ForeignExchangeRate();
+        //$this->witClient = new \Tgallice\Wit\Client($this->config['witai_token']);
+        //$this->foreignExchangerate = new ForeignExchangeRate();
     }
 
     /**
@@ -60,7 +60,9 @@ class ChatbotAI
 
             $response = json_decode((string)$query->getBody(), true);
 
-            return $response['result']['fulfillment']['speech'];
+            // Detecting if there's a Facebook formatted response
+            $return = isset($response['result']['data']['facebook']) ? $response['result']['data']['facebook'] : $response['result']['fulfillment']['speech'];
+            return $return;
         } catch (\Exception $error) {
             Log::warning($error->getMessage());
         }
@@ -83,7 +85,7 @@ class ChatbotAI
             $response = json_decode((string)$response->getBody(), true);
             $intent = $response['entities']['intent'][0]['value'] ?? 'no intent recognized';
         } catch (\Exception $error) {
-            $this->log->warning($error->getMessage());
+            Log::warning($error->getMessage());
         }
 
         return 'The intent of the message: ' . $intent;
