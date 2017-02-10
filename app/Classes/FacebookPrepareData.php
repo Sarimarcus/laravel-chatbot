@@ -28,11 +28,9 @@ class FacebookPrepareData
                 "text":"' . $data . '"
             }';
         // If we have a formatted response
-        if('formatted' == $type)
+        }elseif('formatted' == $type)
         {
-            $message = '"message":
-                ' . $data . '
-            ';
+            $message = '"message": ' . $data;
         }
 
         $footer = '
