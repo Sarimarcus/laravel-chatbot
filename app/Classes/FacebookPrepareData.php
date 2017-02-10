@@ -30,7 +30,7 @@ class FacebookPrepareData
         // If we have a formatted response
         }elseif('formatted' == $type)
         {
-            $message = '"message": ' . $content;
+            $message = '"message": ' . json_encode($content);
         }
 
         $footer = '
