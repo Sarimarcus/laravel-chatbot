@@ -2,6 +2,8 @@
 
 namespace App\Classes;
 
+use Illuminate\Support\Facades\Log;
+
 class FacebookSend
 {
 
@@ -25,6 +27,9 @@ class FacebookSend
 
         $jsonDataEncoded = $this->facebookPrepareData->prepare($senderId, $data);
 
+        Log::info('Sending JSON to Facebook : ' . $jsonDataEncoded);
+
+
         $url = $this->apiUrl . '?access_token=' . $accessToken;
         $ch = curl_init($url);
 
@@ -41,7 +46,7 @@ class FacebookSend
         curl_exec($ch);
 
         if (curl_error($ch)) {
-            $this->log->warning('Send Facebook Curl error: ' . curl_error($ch));
+            Log::warning('Send Facebook Curl error: ' . curl_error($ch));
         }
 
         curl_close($ch);
