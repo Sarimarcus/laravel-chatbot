@@ -4,10 +4,8 @@ namespace App\Classes;
 
 
 use ApiAi\Client;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class ChatbotAI
 {
@@ -24,8 +22,6 @@ class ChatbotAI
     public function __construct($config)
     {
         $this->config = $config;
-        $this->log = new Logger('general');
-        $this->log->pushHandler(new StreamHandler('debug.log'));
         $this->apiClient = new Client($this->config['apiai_token'], null, 'fr');
         $this->witClient = new \Tgallice\Wit\Client($this->config['witai_token']);
         $this->foreignExchangerate = new ForeignExchangeRate();
@@ -55,9 +51,6 @@ class ChatbotAI
      */
     public function getApiAIAnswer($message)
     {
-
-        Log::info('step  : getApiAIAnswer with token : ' . session('_token'));
-
         try {
 
             $query = $this->apiClient->get('query', [
@@ -65,15 +58,11 @@ class ChatbotAI
                 'sessionId' => session('_token')
             ]);
 
-            Log::info('token : ' . session('_token'));
-            dd($query);
-
-
             $response = json_decode((string)$query->getBody(), true);
 
             return $response['result']['fulfillment']['speech'];
         } catch (\Exception $error) {
-            $this->log->warning($error->getMessage());
+            Log::warning($error->getMessage());
         }
     }
 

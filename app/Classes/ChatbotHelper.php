@@ -4,8 +4,6 @@ namespace App\Classes;
 
 
 use Dotenv\Dotenv;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 
 class ChatbotHelper
 {
@@ -22,8 +20,6 @@ class ChatbotHelper
         $this->config = include('config.php');
         $this->chatbotAI = new ChatbotAI($this->config);
         $this->facebookSend = new FacebookSend();
-        $this->log = new Logger('general');
-        $this->log->pushHandler(new StreamHandler('debug.log'));
     }
 
     /**
