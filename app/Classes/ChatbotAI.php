@@ -59,6 +59,7 @@ class ChatbotAI
             ]);
 
             $response = json_decode((string)$query->getBody(), true);
+            Log::info('Response from API.AI : ' . $query->getBody());
 
             // Detecting if there's a Facebook formatted response
             $return = isset($response['result']['fulfillment']['data']['facebook']) ? $response['result']['fulfillment']['data']['facebook'] : $response['result']['fulfillment']['speech'];

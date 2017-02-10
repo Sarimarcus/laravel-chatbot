@@ -24,6 +24,7 @@ class Chatbot extends Controller
 
             // Get the user's message
             $message = $chatbotHelper->getMessage($input);
+            Log::info('Sending message : ' . $message);
 
             // Example 1: Get a static message back
             // $replyMessage = $chatbotHelper->getAnswer($message);
