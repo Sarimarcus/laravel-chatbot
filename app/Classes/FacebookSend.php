@@ -2,9 +2,6 @@
 
 namespace App\Classes;
 
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
-
 class FacebookSend
 {
 
@@ -14,21 +11,19 @@ class FacebookSend
 
     public function __construct()
     {
-        $this->log = new Logger('general');
-        $this->log->pushHandler(new StreamHandler('debug.log'));
         $this->facebookPrepareData = new FacebookPrepareData();
     }
 
     /**
      * @param string $accessToken
      * @param string $senderId
-     * @param string $replyMessage
+     * @param $data
      * @internal param string $jsonDataEncoded
      */
-    public function send(string $accessToken, string $senderId, string $replyMessage)
+    public function send(string $accessToken, string $senderId, $data)
     {
 
-        $jsonDataEncoded = $this->facebookPrepareData->prepare($senderId, $replyMessage);
+        $jsonDataEncoded = $this->facebookPrepareData->prepare($senderId, $data);
 
         $url = $this->apiUrl . '?access_token=' . $accessToken;
         $ch = curl_init($url);
