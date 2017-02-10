@@ -54,6 +54,9 @@ class ChatbotAI
      */
     public function getApiAIAnswer($message)
     {
+
+        Log::info('step  : getApiAIAnswer with token : ' . session('_token'));
+
         try {
 
             $query = $this->apiClient->get('query', [
