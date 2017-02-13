@@ -25,7 +25,7 @@ class Chatbot extends Controller
 
             // Get the user's message
             $message = $chatbotHelper->getMessage($input);
-            Log::info('Sending message : ' . $message);
+            Log::info('Sending message : ' . trim($message));
 
             // Don't forget to place your Api.ai Client access token in the .env file
             $data = $chatbotHelper->getAnswer($message, 'apiai');

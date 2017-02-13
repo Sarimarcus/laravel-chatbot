@@ -28,7 +28,7 @@ class FacebookSend
 
         $jsonDataEncoded = $this->facebookPrepareData->prepare($senderId, $content, $type);
 
-        Log::info('Sending JSON to Facebook : ' . $jsonDataEncoded);
+        Log::info('Sending JSON to Facebook : ' . trim($jsonDataEncoded));
 
 
         $url = $this->apiUrl . '?access_token=' . $accessToken;

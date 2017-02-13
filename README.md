@@ -10,6 +10,20 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "whitelisted_domains" : ["http://www.get-the-look.fr"],
   "domain_action_type": "add"
 }' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=PAGE_ACCESS_TOKEN"
+
+
+Elements limits
+
+Title: 80 characters
+
+Subtitle: 80 characters
+
+Call-to-action title: 20 characters
+
+Call-to-action items: 3 buttons
+
+Bubbles per message (horizontal scroll): 10 elements
+
 ```
 ## License
 
