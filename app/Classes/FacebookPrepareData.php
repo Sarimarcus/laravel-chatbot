@@ -14,27 +14,19 @@ class FacebookPrepareData
      */
     public function prepare($senderId, $content, $type)
     {
-
-        $header =  '{
-            "recipient":{
-                "id":"' . $senderId . '"
-            },';
-
+        $header =  '{"recipient":{"id":"' . $senderId . '"},';
 
         // Just a plain text response
         if('plaintext' == $type)
         {
-            $message = '"message":{
-                "text":"' . $content . '"
-            }';
+            $message = '"message":{"text":"' . $content . '"}';
         // If we have a formatted response
         }elseif('formatted' == $type)
         {
             $message = '"message": ' . json_encode($content, JSON_UNESCAPED_SLASHES);
         }
 
-        $footer = '
-        }';
+        $footer = '}';
 
         return $header . $message . $footer;
     }
