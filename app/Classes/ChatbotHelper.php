@@ -55,6 +55,16 @@ class ChatbotHelper
     }
 
     /**
+     * Check if the callback is a quick reply payload
+     * @param $input
+     * @return bool
+     */
+    public function isQuickReplyPayload($input)
+    {
+        return isset($input['entry'][0]['messaging'][0]['message']['quick_reply']['payload']);
+    }
+
+    /**
      * Get the answer to a given user's message
      * @param null $api
      * @param string $message

@@ -21,15 +21,21 @@ class Chatbot extends Controller
 
         $senderId = $chatbotHelper->getSenderId($input);
 
-        Log::info('Input : ' . print_r($input, true));
+        //Log::info('Input : ' . var_dump($input));
 
         if ($senderId && $chatbotHelper->isMessage($input)) {
+
+            // Check if there's a payload
+            if($chatbotHelper->isQuickReplyPayload($input)){
+                // I know, it's dirty
+                input['entry'][0]['messaging'][0]['message']['text'] = 'PAYLOAD TAG : ' . $input['entry'][0]['messaging'][0]['message']['quick_reply']['payload'];
+            }
 
             // Get the user's message
             $message = $chatbotHelper->getMessage($input);
             Log::info('Sending message : ' . trim($message));
 
-            // Don't forget to place your Api.ai Client access token in the .env file
+            // API.AI call
             $data = $chatbotHelper->getAnswer($message, 'apiai');
 
             // Send the answer back to the Facebook chat
