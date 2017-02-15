@@ -100,6 +100,8 @@ class FacebookSend
         $url = $this->profileApiUrl . $senderId . '?access_token=' . $accessToken . '&fields=first_name,last_name,profile_pic,locale,timezone,gender';
         $ch = curl_init($url);
 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
         // Execute
         $content = curl_exec($ch);
 
