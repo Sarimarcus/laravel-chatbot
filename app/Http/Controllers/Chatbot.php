@@ -25,9 +25,8 @@ class Chatbot extends Controller
 
         if ($senderId && $chatbotHelper->isMessage($input)) {
 
-
             // Getting user profile
-            $chatbotHelper->userProfile($senderId);
+            $chatbotHelper->getUserProfile($senderId);
 
             // Check if there's a payload
             if($chatbotHelper->isQuickReplyPayload($input)){
@@ -44,6 +43,9 @@ class Chatbot extends Controller
 
             // API.AI call
             $data = $chatbotHelper->getAnswer($message, 'apiai');
+
+            // Add some contexts
+            $chatbotHelper->setContexts();
 
             // Send the answer back to the Facebook chat
             $chatbotHelper->send($senderId, $data['content'], $data['type']);

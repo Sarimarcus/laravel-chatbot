@@ -13,6 +13,7 @@ class ChatbotHelper
     protected $log;
     private $accessToken;
     public $config;
+    public $user;
 
     public function __construct()
     {
@@ -109,9 +110,34 @@ class ChatbotHelper
      * Get user profile
      * @param $senderId
      */
-    public function userProfile($senderId)
+    public function getUserProfile($senderId)
     {
-        return $this->facebookSend->userProfile($this->accessToken, $senderId);
+        if(!empty($this->user)){
+            $user = $this->facebookSend->userProfile($this->accessToken, $senderId)
+            $this->user = json_decode($user, true);
+        }
+    }
+
+    /**
+     * Set Contexts Parameters
+     * @param $data
+     */
+    public function getUserProfile($data)
+    {
+        // Set user parameters
+        $parameters = array();
+        if (!empty($this->user)) {
+            foreach ($this->user as $key => $value) {
+                $parameters[$key] = $value;
+            }
+        }
+
+        $data['result']['contexts'] = array(
+            "name" => "generic",
+            "parameters" => $parameters
+        );
+
+        return $data;
     }
 
     /**
