@@ -109,7 +109,7 @@ class FacebookSend
 
         curl_close($ch);
 
-        Log::info('Getting user info : ' . trim($e));
+        Log::info('Getting user info : ' . trim($content));
 
         return $content;
     }
