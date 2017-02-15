@@ -37,7 +37,7 @@ class FacebookPrepareData
     public function typingOn($senderId)
     {
         $header =  '{"recipient":{"id":"' . $senderId . '"},';
-        $message = '"sender_action":{"typing_on"}';
+        $message = '"sender_action":"typing_on"';
         $footer = '}';
 
         return $header . $message . $footer;

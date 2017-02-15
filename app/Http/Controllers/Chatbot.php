@@ -38,8 +38,6 @@ class Chatbot extends Controller
             // Show typing indicators
             $chatbotHelper->typingOn($senderId);
 
-            sleep(rand(1,2));
-
             // API.AI call
             $data = $chatbotHelper->getAnswer($message, 'apiai');
 
