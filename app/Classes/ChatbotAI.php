@@ -53,14 +53,19 @@ class ChatbotAI
     {
         try {
 
-            $query = $this->apiClient->get('query', [
+            $data = [
                 'query' => $message,
                 'sessionId' => substr(session('_token'),0 , 36),
                 'contexts' => $contexts
-            ]);
+            ];
+
+            Log::info('Sending to API.AI : ' . json_encode($data));
+
+            $query = $this->apiClient->get('query', $data);
 
             $response = json_decode((string)$query->getBody(), true);
-            Log::info('Response from API.AI : ' . $query->getBody());
+
+            Log::info('Response from API.AI : ' . $json_encode($response));
 
             // Detecting if there's a Facebook formatted response
             if(isset($response['result']['fulfillment']['data']['facebook'])){
