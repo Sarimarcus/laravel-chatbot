@@ -122,7 +122,7 @@ class ChatbotHelper
      * Set Contexts Parameters
      * @param $data
      */
-    public function getUserProfile($data)
+    public function setContexts($data)
     {
         // Set user parameters
         $parameters = array();
