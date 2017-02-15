@@ -11,7 +11,9 @@ class ChatbotHelper
     protected $chatbotAI;
     protected $facebookSend;
     protected $log;
+
     private $accessToken;
+
     public $config;
     public $user;
 
@@ -117,7 +119,7 @@ class ChatbotHelper
      */
     public function getUserProfile($senderId)
     {
-        if(!empty($this->user)){
+        if(isset($this->user)){
             $user = $this->facebookSend->userProfile($this->accessToken, $senderId);
             $this->user = json_decode($user, true);
         }
@@ -137,7 +139,7 @@ class ChatbotHelper
             }
         }
 
-        $data['result']['contexts'] = array(
+        $data['content']['result']['contexts'] = array(
             "name" => "generic",
             "parameters" => $parameters
         );
