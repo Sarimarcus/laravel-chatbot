@@ -8,6 +8,7 @@ class FacebookSend
 {
 
     protected $apiUrl = 'https://graph.facebook.com/v2.6/me/messages';
+    protected $profileApiUrl = 'https://graph.facebook.com/v2.6/';
     protected $log;
     protected $facebookPrepareData;
 
@@ -53,12 +54,9 @@ class FacebookSend
         curl_close($ch);
     }
 
-
     /**
      * @param string $accessToken
      * @param string $senderId
-     * @param $content
-     * @param $type
      * @internal param string $jsonDataEncoded
      */
     public function typingOn(string $accessToken, string $senderId)
@@ -89,6 +87,31 @@ class FacebookSend
         }
 
         curl_close($ch);
+    }
+
+    /**
+     * @param string $accessToken
+     * @param string $senderId
+     * @internal param string $jsonDataEncoded
+     */
+    public function userProfile(string $accessToken, string $senderId)
+    {
+
+        $url = $this->profileApiUrl . $senderId . '?access_token=' . $accessToken . '&fields=first_name,last_name,profile_pic,locale,timezone,gender';
+        $ch = curl_init($url);
+
+        // Execute
+        $content = curl_exec($ch);
+
+        if (curl_error($ch)) {
+            Log::warning('Send Facebook Curl error: ' . curl_error($ch));
+        }
+
+        curl_close($ch);
+
+        Log::info('Getting user info : ' . trim($e));
+
+        return $content
     }
 
 }

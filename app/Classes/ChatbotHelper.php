@@ -106,6 +106,15 @@ class ChatbotHelper
     }
 
     /**
+     * Get user profile
+     * @param $senderId
+     */
+    public function userProfile($senderId)
+    {
+        return $this->facebookSend->userProfile($this->accessToken, $senderId);
+    }
+
+    /**
      * Verify Facebook webhook
      * This is only needed when you setup or change the webhook
      * @param $request
