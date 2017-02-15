@@ -49,13 +49,14 @@ class ChatbotAI
      * @param string message
      * @return string
      */
-    public function getApiAIAnswer($message)
+    public function getApiAIAnswer($message, $contexts = array())
     {
         try {
 
             $query = $this->apiClient->get('query', [
                 'query' => $message,
-                'sessionId' => substr(session('_token'),0 , 36)
+                'sessionId' => substr(session('_token'),0 , 36),
+                'contexts' => $contexts
             ]);
 
             $response = json_decode((string)$query->getBody(), true);

@@ -36,6 +36,7 @@ class Chatbot extends Controller
 
             // Get the user's message
             $message = $chatbotHelper->getMessage($input);
+
             Log::info('Sending message : ' . trim($message));
 
             // Show typing indicators
@@ -43,9 +44,6 @@ class Chatbot extends Controller
 
             // API.AI call
             $data = $chatbotHelper->getAnswer($message, 'apiai');
-
-            // Add some contexts
-            $chatbotHelper->setContexts($data);
 
             // Send the answer back to the Facebook chat
             $chatbotHelper->send($senderId, $data['content'], $data['type']);

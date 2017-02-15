@@ -82,7 +82,7 @@ class ChatbotHelper
     {
 
         if ($api === 'apiai') {
-            return $this->chatbotAI->getApiAIAnswer($message);
+            return $this->chatbotAI->getApiAIAnswer($message, $this->setContexts());
         } elseif ($api === 'witai') {
             return $this->chatbotAI->getWitAIAnswer($message);
         } elseif ($api === 'rates') {
@@ -119,7 +119,7 @@ class ChatbotHelper
      */
     public function getUserProfile($senderId)
     {
-        if(isset($this->user)){
+        if(!isset($this->user)){
             $user = $this->facebookSend->userProfile($this->accessToken, $senderId);
             $this->user = json_decode($user, true);
         }
@@ -127,24 +127,19 @@ class ChatbotHelper
 
     /**
      * Set Contexts Parameters
-     * @param $data
+     * @param $message
      */
-    public function setContexts($data)
+    public function setContexts()
     {
-        // Set user parameters
-        $parameters = array();
-        if (!empty($this->user)) {
+        // Set contexts
+        $contexts = array();
+        if (isset($this->user)) {
             foreach ($this->user as $key => $value) {
-                $parameters[$key] = $value;
+                $contexts[$key] = $value;
             }
         }
 
-        $data['content']['result']['contexts'] = array(
-            "name" => "generic",
-            "parameters" => $parameters
-        );
-
-        return $data;
+        return $contexts;
     }
 
     /**
