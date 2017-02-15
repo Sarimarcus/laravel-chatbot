@@ -151,7 +151,7 @@ class ChatbotHelper
      * Set originalRequest data
      * @param $message
      */
-    public function originalRequest()
+    public function setOriginalRequest()
     {
         // Set originalRequest
         $originalRequest = array();

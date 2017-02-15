@@ -54,9 +54,9 @@ class ChatbotAI
         try {
 
             $data = [
-                'query' => $message,
-                'sessionId' => substr(session('_token'),0 , 36),
-                'contexts' => $contexts,
+                'query'           => $message,
+                'sessionId'       => substr(session('_token'),0 , 36),
+                'contexts'        => $contexts,
                 'originalRequest' => $originalRequest
             ];
 
@@ -71,12 +71,12 @@ class ChatbotAI
             // Detecting if there's a Facebook formatted response
             if(isset($response['result']['fulfillment']['data']['facebook'])){
                 return array(
-                    'type' => 'formatted',
+                    'type'    => 'formatted',
                     'content' => $response['result']['fulfillment']['data']['facebook']
                 );
             } else {
                 return array(
-                    'type' => 'plaintext',
+                    'type'    => 'plaintext',
                     'content' => $response['result']['fulfillment']['speech']
                 );
             }
