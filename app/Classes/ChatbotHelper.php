@@ -133,11 +133,17 @@ class ChatbotHelper
     {
         // Set contexts
         $contexts = array();
+
+        // User
         if (isset($this->user)) {
             foreach ($this->user as $key => $value) {
-                $contexts[$key] = $value;
+                $parameters[$key] = $value;
             }
         }
+
+        $contexts[] = array(
+            'name' => 'user',
+            'parameters' => $parameters);
 
         return $contexts;
     }
