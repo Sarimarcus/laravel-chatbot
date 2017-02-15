@@ -111,7 +111,7 @@ class FacebookSend
 
         Log::info('Getting user info : ' . trim($e));
 
-        return $content
+        return $content;
     }
 
 }
