@@ -49,14 +49,15 @@ class ChatbotAI
      * @param string message
      * @return string
      */
-    public function getApiAIAnswer($message, $contexts = array())
+    public function getApiAIAnswer($message, $contexts = array(), $originalRequest = array())
     {
         try {
 
             $data = [
                 'query' => $message,
                 'sessionId' => substr(session('_token'),0 , 36),
-                'contexts' => $contexts
+                'contexts' => $contexts,
+                'originalRequest' => $originalRequest
             ];
 
             Log::info('Sending to API.AI : ' . json_encode($data));

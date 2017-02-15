@@ -82,7 +82,7 @@ class ChatbotHelper
     {
 
         if ($api === 'apiai') {
-            return $this->chatbotAI->getApiAIAnswer($message, $this->setContexts());
+            return $this->chatbotAI->getApiAIAnswer($message, $this->setContexts(), $this->setOriginalRequest());
         } elseif ($api === 'witai') {
             return $this->chatbotAI->getWitAIAnswer($message);
         } elseif ($api === 'rates') {
@@ -127,7 +127,6 @@ class ChatbotHelper
 
     /**
      * Set Contexts Parameters
-     * @param $message
      */
     public function setContexts()
     {
@@ -146,6 +145,27 @@ class ChatbotHelper
             'parameters' => $parameters);
 
         return $contexts;
+    }
+
+      /**
+     * Set originalRequest data
+     * @param $message
+     */
+    public function originalRequest()
+    {
+        // Set originalRequest
+        $originalRequest = array();
+
+        // User
+        if (isset($this->user)) {
+            foreach ($this->user as $key => $value) {
+                $data[$key] = $value;
+            }
+        }
+
+        $originalRequest[] = array('data' => $data);
+
+        return $originalRequest;
     }
 
     /**

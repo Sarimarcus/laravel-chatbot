@@ -21,8 +21,6 @@ class Chatbot extends Controller
 
         $senderId = $chatbotHelper->getSenderId($input);
 
-        //Log::info('Input : ' . var_dump($input));
-
         if ($senderId && $chatbotHelper->isMessage($input)) {
 
             // Getting user profile
