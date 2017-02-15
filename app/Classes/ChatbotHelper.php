@@ -113,7 +113,7 @@ class ChatbotHelper
     public function getUserProfile($senderId)
     {
         if(!empty($this->user)){
-            $user = $this->facebookSend->userProfile($this->accessToken, $senderId)
+            $user = $this->facebookSend->userProfile($this->accessToken, $senderId);
             $this->user = json_decode($user, true);
         }
     }
