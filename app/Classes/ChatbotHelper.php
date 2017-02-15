@@ -23,6 +23,11 @@ class ChatbotHelper
         $this->facebookSend = new FacebookSend();
     }
 
+    public function __isset($property)
+    {
+        return isset($this->$property);
+    }
+
     /**
      * Get the sender id of the message
      * @param $input
@@ -160,7 +165,5 @@ class ChatbotHelper
 
             echo $hubChallenge;
         }
-
-
     }
 }
