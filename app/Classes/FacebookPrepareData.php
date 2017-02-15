@@ -30,4 +30,17 @@ class FacebookPrepareData
 
         return $header . $message . $footer;
     }
+
+    /*
+     * Typing on while waiting for API.AI
+     */
+    public function typingOn($senderId)
+    {
+        $header =  '{"recipient":{"id":"' . $senderId . '"},';
+        $message = '"sender_action":{"typing_on"}';
+        $footer = '}';
+
+        return $header . $message . $footer;
+    }
+
 }

@@ -35,6 +35,9 @@ class Chatbot extends Controller
             $message = $chatbotHelper->getMessage($input);
             Log::info('Sending message : ' . trim($message));
 
+            // Show typing indicators
+            $chatbotHelper->typingOn($senderId);
+
             // API.AI call
             $data = $chatbotHelper->getAnswer($message, 'apiai');
 

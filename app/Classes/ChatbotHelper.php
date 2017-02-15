@@ -97,6 +97,15 @@ class ChatbotHelper
     }
 
     /**
+     * Show typing indicators
+     * @param $senderId
+     */
+    public function typingOn($senderId)
+    {
+        return $this->facebookSend->typingOn($this->accessToken, $senderId);
+    }
+
+    /**
      * Verify Facebook webhook
      * This is only needed when you setup or change the webhook
      * @param $request
