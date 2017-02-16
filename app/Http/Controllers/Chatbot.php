@@ -44,7 +44,7 @@ class Chatbot extends Controller
             $data = $chatbotHelper->getAnswer($message, 'apiai');
 
             // Send the answer back to the Facebook chat
-            $chatbotHelper->send($senderId, $data['content'], $data['type']);
+            $chatbotHelper->send($senderId, $data['content'], $data['type'], $data['action']);
         }
     }
 }

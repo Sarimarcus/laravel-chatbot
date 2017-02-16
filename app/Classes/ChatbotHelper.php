@@ -99,8 +99,10 @@ class ChatbotHelper
      * @param $content
      * @param $type
      */
-    public function send($senderId, $content, $type)
+    public function send($senderId, $content, $type, $action)
     {
+        // Apply some custom message
+        $content = $this->returnCustomMessage($action, $content);
         return $this->facebookSend->send($this->accessToken, $senderId, $content, $type);
     }
 
@@ -126,6 +128,27 @@ class ChatbotHelper
     }
 
     /**
+     * Return custom message
+     * @param $message
+     */
+    public function returnCustomMessage($action, $content)
+    {
+        switch ($action) {
+
+            // Let's be polite and say hello with the firstname
+            case 'input.welcome':
+            case 'smalltalk.greetings':
+                if (isset($this->user)) $firstname = $this->user->first_name;
+                return $content . $firstname . ' !';
+                break;
+
+            default:
+                return $content;
+                break;
+        }
+    }
+
+    /**
      * Set Contexts Parameters
      */
     public function setContexts()
@@ -134,15 +157,15 @@ class ChatbotHelper
         $contexts = array();
 
         // User
-        if (isset($this->user)) {
-            foreach ($this->user as $key => $value) {
-                $parameters[$key] = $value;
-            }
-        }
+        // if (isset($this->user)) {
+        //     foreach ($this->user as $key => $value) {
+        //         $parameters[$key] = $value;
+        //     }
+        // }
 
-        $contexts[] = array(
-            'name' => 'user',
-            'parameters' => $parameters);
+        // $contexts[] = array(
+        //     'name' => 'user',
+        //     'parameters' => $parameters);
 
         return $contexts;
     }
@@ -157,13 +180,13 @@ class ChatbotHelper
         $originalRequest = array();
 
         // User
-        if (isset($this->user)) {
-            foreach ($this->user as $key => $value) {
-                $data[$key] = $value;
-            }
-        }
+        // if (isset($this->user)) {
+        //     foreach ($this->user as $key => $value) {
+        //         $data[$key] = $value;
+        //     }
+        // }
 
-        $originalRequest[] = array('data' => $data);
+        // $originalRequest[] = array('data' => $data);
 
         return $originalRequest;
     }

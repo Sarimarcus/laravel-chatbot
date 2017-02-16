@@ -72,12 +72,14 @@ class ChatbotAI
             if(isset($response['result']['fulfillment']['data']['facebook'])){
                 return array(
                     'type'    => 'formatted',
-                    'content' => $response['result']['fulfillment']['data']['facebook']
+                    'content' => $response['result']['fulfillment']['data']['facebook'],
+                    'action'  => $response['result']['action']
                 );
             } else {
                 return array(
                     'type'    => 'plaintext',
-                    'content' => $response['result']['fulfillment']['speech']
+                    'content' => $response['result']['fulfillment']['speech'],
+                    'action'  => $response['result']['action']
                 );
             }
         } catch (\Exception $error) {
