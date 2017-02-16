@@ -23,9 +23,6 @@ class Chatbot extends Controller
 
         if ($senderId && $chatbotHelper->isMessage($input)) {
 
-            // Getting user profile
-            $chatbotHelper->getUserProfile($senderId);
-
             // Check if there's a payload
             if($chatbotHelper->isQuickReplyPayload($input)){
                 // I know, it's dirty

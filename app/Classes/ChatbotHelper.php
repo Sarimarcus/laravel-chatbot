@@ -102,7 +102,7 @@ class ChatbotHelper
     public function send($senderId, $content, $type, $action)
     {
         // Apply some custom message
-        $content = $this->returnCustomMessage($action, $content);
+        $content = $this->returnCustomMessage($senderId, $action, $content);
         return $this->facebookSend->send($this->accessToken, $senderId, $content, $type);
     }
 
@@ -123,22 +123,28 @@ class ChatbotHelper
     {
         if(!isset($this->user)){
             $user = $this->facebookSend->userProfile($this->accessToken, $senderId);
+
             $this->user = json_decode($user, true);
         }
     }
 
     /**
      * Return custom message
-     * @param $message
+     * @param $senderId
+     * @param $action
+     * @param $content
      */
-    public function returnCustomMessage($action, $content)
+    public function returnCustomMessage($senderId, $action, $content)
     {
         switch ($action) {
 
             // Let's be polite and say hello with the firstname
             case 'input.welcome':
             case 'smalltalk.greetings':
-                if (isset($this->user)) $firstname = $this->user->first_name;
+
+                // Getting user profile
+                $this->getUserProfile($senderId);
+                if (isset($this->user)) $firstname = $this->user['first_name'];
                 return $content . $firstname . ' !';
                 break;
 
