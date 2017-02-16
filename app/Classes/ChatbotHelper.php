@@ -140,7 +140,6 @@ class ChatbotHelper
 
             // Let's be polite and say hello with the firstname
             case 'input.welcome':
-            case 'smalltalk.greetings':
 
                 // Getting user profile
                 $this->getUserProfile($senderId);
