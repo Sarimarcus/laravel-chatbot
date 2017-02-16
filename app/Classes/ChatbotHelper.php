@@ -145,7 +145,7 @@ class ChatbotHelper
                 // Getting user profile
                 $this->getUserProfile($senderId);
                 if (isset($this->user)) $firstname = $this->user['first_name'];
-                return $content . $firstname . ' !';
+                return $content . ' ' . $firstname . ' !';
                 break;
 
             default:
