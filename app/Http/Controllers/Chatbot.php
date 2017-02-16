@@ -26,7 +26,7 @@ class Chatbot extends Controller
             // Check if there's a payload
             if($chatbotHelper->isQuickReplyPayload($input)){
                 // I know, it's dirty
-                $input['entry'][0]['messaging'][0]['message']['text'] = 'PAYLOAD TAG : ' . $input['entry'][0]['messaging'][0]['message']['quick_reply']['payload'];
+                $input['entry'][0]['messaging'][0]['message']['text'] = $input['entry'][0]['messaging'][0]['message']['quick_reply']['payload'];
             }
 
             // Get the user's message
