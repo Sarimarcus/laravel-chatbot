@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Log;
 class FacebookSend
 {
 
-    protected $apiUrl = 'https://graph.facebook.com/v2.6/me/messages';
-    protected $profileApiUrl = 'https://graph.facebook.com/v2.6/';
+    protected $apiUrl = 'https://graph.facebook.com/v2.8/me/messages';
+    protected $profileApiUrl = 'https://graph.facebook.com/v2.8/';
     protected $log;
     protected $facebookPrepareData;
 
