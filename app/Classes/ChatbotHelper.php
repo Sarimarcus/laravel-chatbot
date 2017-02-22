@@ -90,7 +90,6 @@ class ChatbotHelper
         } else {
             return $this->chatbotAI->getAnswer($message);
         }
-
     }
 
     /**

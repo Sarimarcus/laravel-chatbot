@@ -109,16 +109,4 @@ class ChatbotAI
 
         return 'The intent of the message: ' . $intent;
     }
-
-    /**
-     * Get the foreign rates based on the users base (EUR, USD...)
-     * @param $message
-     * @return string
-     */
-    public function getForeignExchangeRateAnswer($message)
-    {
-        return $this->foreignExchangerate->getRates($message);
-    }
-
-
 }
