@@ -37,6 +37,6 @@ class ChatbotNotifications extends Command
      */
     public function handle()
     {
-        //
+        \App\Classes\Notifications::send();
     }
 }
