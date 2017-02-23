@@ -14,10 +14,11 @@ class Notifications
     {
         $accessToken = getenv('PAGE_ACCESS_TOKEN');
         $content = "Test d'un envoi de notification. " . "\u{1F30F}";
+        $facebookAPI = new FacebookAPI();
 
         $users = User::all();
         foreach ($users as $user) {
-            new FacebookAPI()->send($this->accessToken, $user->senderId, $content, 'plaintext');
+            $facebookAPI->send($accessToken, $user->senderId, $content, 'plaintext');
         }
     }
 }
