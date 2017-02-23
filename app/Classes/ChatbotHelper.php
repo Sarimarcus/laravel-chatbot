@@ -2,11 +2,13 @@
 
 namespace App\Classes;
 
+use App\Models\User;
+
 class ChatbotHelper
 {
 
     protected $chatbotAI;
-    protected $facebookSend;
+    protected $facebookAPI;
     protected $log;
 
     private $accessToken;
@@ -19,7 +21,7 @@ class ChatbotHelper
         $this->accessToken  = getenv('PAGE_ACCESS_TOKEN');
         $this->config       = include 'config.php';
         $this->chatbotAI    = new ChatbotAI($this->config);
-        $this->facebookSend = new FacebookSend();
+        $this->facebookAPI = new facebookAPI();
     }
 
     public function __isset($property)
@@ -99,7 +101,7 @@ class ChatbotHelper
     {
         // Apply some custom message
         $content = $this->returnCustomMessage($senderId, $action, $content);
-        return $this->facebookSend->send($this->accessToken, $senderId, $content, $type);
+        return $this->facebookAPI->send($this->accessToken, $senderId, $content, $type);
     }
 
     /**
@@ -108,7 +110,7 @@ class ChatbotHelper
      */
     public function typingOn($senderId)
     {
-        return $this->facebookSend->typingOn($this->accessToken, $senderId);
+        return $this->facebookAPI->typingOn($this->accessToken, $senderId);
     }
 
     /**
@@ -118,9 +120,9 @@ class ChatbotHelper
     public function getUserProfile($senderId)
     {
         if (!isset($this->user)) {
-            $user = $this->facebookSend->userProfile($this->accessToken, $senderId);
-
-            $this->user = json_decode($user, true);
+            $user = $this->facebookAPI->userProfile($this->accessToken, $senderId);
+            $data = json_decode($user, true);
+            $this->user = User::updateOrCreate(['senderId' => $data['senderId']], $data);
         }
     }
 

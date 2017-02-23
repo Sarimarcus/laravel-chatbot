@@ -4,7 +4,7 @@ namespace App\Classes;
 
 use Illuminate\Support\Facades\Log;
 
-class FacebookSend
+class FacebookAPI
 {
 
     protected $apiUrl        = 'https://graph.facebook.com/v2.8/me/messages';
