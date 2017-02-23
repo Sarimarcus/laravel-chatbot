@@ -2,9 +2,6 @@
 
 namespace App\Classes;
 
-
-use Dotenv\Dotenv;
-
 class ChatbotHelper
 {
 
@@ -19,9 +16,9 @@ class ChatbotHelper
 
     public function __construct()
     {
-        $this->accessToken = getenv('PAGE_ACCESS_TOKEN');
-        $this->config = include('config.php');
-        $this->chatbotAI = new ChatbotAI($this->config);
+        $this->accessToken  = getenv('PAGE_ACCESS_TOKEN');
+        $this->config       = include 'config.php';
+        $this->chatbotAI    = new ChatbotAI($this->config);
         $this->facebookSend = new FacebookSend();
     }
 
@@ -58,7 +55,7 @@ class ChatbotHelper
     public function isMessage($input)
     {
         return isset($input['entry'][0]['messaging'][0]['message']['text']) && !isset
-        ($input['entry'][0]['messaging'][0]['message']['is_echo']);
+            ($input['entry'][0]['messaging'][0]['message']['is_echo']);
 
     }
 
@@ -120,7 +117,7 @@ class ChatbotHelper
      */
     public function getUserProfile($senderId)
     {
-        if(!isset($this->user)){
+        if (!isset($this->user)) {
             $user = $this->facebookSend->userProfile($this->accessToken, $senderId);
 
             $this->user = json_decode($user, true);
@@ -142,7 +139,10 @@ class ChatbotHelper
 
                 // Getting user profile
                 $this->getUserProfile($senderId);
-                if (isset($this->user)) $firstname = $this->user['first_name'];
+                if (isset($this->user)) {
+                    $firstname = $this->user['first_name'];
+                }
+
                 return $content . ' ' . $firstname . ' !';
                 break;
 
@@ -174,9 +174,8 @@ class ChatbotHelper
         return $contexts;
     }
 
-      /**
+    /**
      * Set originalRequest data
-     * @param $message
      */
     public function setOriginalRequest()
     {
@@ -209,7 +208,7 @@ class ChatbotHelper
 
         $hubVerifyToken = null;
         $hubVerifyToken = $request['hub_verify_token'];
-        $hubChallenge = $request['hub_challenge'];
+        $hubChallenge   = $request['hub_challenge'];
 
         if (isset($hubChallenge) && $hubVerifyToken == $this->config['webhook_verify_token']) {
 

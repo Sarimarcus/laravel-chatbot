@@ -7,9 +7,8 @@ use Illuminate\Support\Facades\Log;
 class FacebookSend
 {
 
-    protected $apiUrl = 'https://graph.facebook.com/v2.8/me/messages';
+    protected $apiUrl        = 'https://graph.facebook.com/v2.8/me/messages';
     protected $profileApiUrl = 'https://graph.facebook.com/v2.8/';
-    protected $log;
     protected $facebookPrepareData;
 
     public function __construct()
@@ -26,14 +25,12 @@ class FacebookSend
      */
     public function send(string $accessToken, string $senderId, $content, $type)
     {
-
         $jsonDataEncoded = $this->facebookPrepareData->prepare($senderId, $content, $type);
 
         Log::info('Sending JSON to Facebook : ' . trim($jsonDataEncoded));
 
-
         $url = $this->apiUrl . '?access_token=' . $accessToken;
-        $ch = curl_init($url);
+        $ch  = curl_init($url);
 
         // Tell cURL to send POST request.
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -61,14 +58,12 @@ class FacebookSend
      */
     public function typingOn(string $accessToken, string $senderId)
     {
-
         $jsonDataEncoded = $this->facebookPrepareData->typingOn($senderId);
 
         Log::info('Sending JSON to Facebook : ' . trim($jsonDataEncoded));
 
-
         $url = $this->apiUrl . '?access_token=' . $accessToken;
-        $ch = curl_init($url);
+        $ch  = curl_init($url);
 
         // Tell cURL to send POST request.
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -96,9 +91,8 @@ class FacebookSend
      */
     public function userProfile(string $accessToken, string $senderId)
     {
-
         $url = $this->profileApiUrl . $senderId . '?access_token=' . $accessToken . '&fields=first_name,last_name,profile_pic,locale,timezone,gender';
-        $ch = curl_init($url);
+        $ch  = curl_init($url);
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 

@@ -2,7 +2,6 @@
 
 namespace App\Classes;
 
-
 use ApiAi\Client;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -21,10 +20,8 @@ class ChatbotAI
      */
     public function __construct($config)
     {
-        $this->config = $config;
+        $this->config    = $config;
         $this->apiClient = new Client($this->config['apiai_token'], null, 'fr');
-        //$this->witClient = new \Tgallice\Wit\Client($this->config['witai_token']);
-        //$this->foreignExchangerate = new ForeignExchangeRate();
     }
 
     /**
@@ -55,31 +52,31 @@ class ChatbotAI
 
             $data = [
                 'query'           => $message,
-                'sessionId'       => substr(session('_token'),0 , 36),
+                'sessionId'       => substr(session('_token'), 0, 36),
                 'contexts'        => $contexts,
-                'originalRequest' => $originalRequest
+                'originalRequest' => $originalRequest,
             ];
 
             Log::info('Sending to API.AI : ' . json_encode($data));
 
             $query = $this->apiClient->get('query', $data);
 
-            $response = json_decode((string)$query->getBody(), true);
+            $response = json_decode((string) $query->getBody(), true);
 
             Log::info('Response from API.AI : ' . json_encode($response));
 
             // Detecting if there's a Facebook formatted response
-            if(isset($response['result']['fulfillment']['data']['facebook'])){
+            if (isset($response['result']['fulfillment']['data']['facebook'])) {
                 return array(
                     'type'    => 'formatted',
                     'content' => $response['result']['fulfillment']['data']['facebook'],
-                    'action'  => $response['result']['action']
+                    'action'  => $response['result']['action'],
                 );
             } else {
                 return array(
                     'type'    => 'plaintext',
                     'content' => $response['result']['fulfillment']['speech'],
-                    'action'  => $response['result']['action']
+                    'action'  => $response['result']['action'],
                 );
             }
         } catch (\Exception $error) {
@@ -101,8 +98,8 @@ class ChatbotAI
             ]);
 
             // Get the decoded body
-            $response = json_decode((string)$response->getBody(), true);
-            $intent = $response['entities']['intent'][0]['value'] ?? 'no intent recognized';
+            $response = json_decode((string) $response->getBody(), true);
+            $intent   = $response['entities']['intent'][0]['value'] ?  ? 'no intent recognized';
         } catch (\Exception $error) {
             Log::warning($error->getMessage());
         }

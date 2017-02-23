@@ -14,15 +14,13 @@ class FacebookPrepareData
      */
     public function prepare($senderId, $content, $type)
     {
-        $header =  '{"recipient":{"id":"' . $senderId . '"},';
+        $header = '{"recipient":{"id":"' . $senderId . '"},';
 
         // Just a plain text response
-        if('plaintext' == $type)
-        {
+        if ('plaintext' == $type) {
             $message = '"message":{"text":"' . $content . '"}';
-        // If we have a formatted response
-        }elseif('formatted' == $type)
-        {
+            // If we have a formatted response
+        } elseif ('formatted' == $type) {
             $message = '"message": ' . json_encode($content, JSON_UNESCAPED_SLASHES);
         }
 
@@ -36,9 +34,9 @@ class FacebookPrepareData
      */
     public function typingOn($senderId)
     {
-        $header =  '{"recipient":{"id":"' . $senderId . '"},';
+        $header  = '{"recipient":{"id":"' . $senderId . '"},';
         $message = '"sender_action":"typing_on"';
-        $footer = '}';
+        $footer  = '}';
 
         return $header . $message . $footer;
     }
