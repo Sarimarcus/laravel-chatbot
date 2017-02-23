@@ -9,7 +9,6 @@ class ChatbotHelper
 
     protected $chatbotAI;
     protected $facebookAPI;
-    protected $log;
 
     private $accessToken;
 
