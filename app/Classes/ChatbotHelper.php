@@ -122,7 +122,7 @@ class ChatbotHelper
         if (!isset($this->user)) {
             $user = $this->facebookAPI->userProfile($this->accessToken, $senderId);
             $data = json_decode($user, true);
-            //$this->user = User::updateOrCreate(['senderId' => $senderId], $data);
+            $this->user = User::updateOrCreate(['senderId' => $senderId], $data);
         }
     }
 
