@@ -83,27 +83,4 @@ class ChatbotAI
             Log::warning($error->getMessage());
         }
     }
-
-    /**
-     * Get the answer to the user's message with help from wit.ai
-     * @param $message
-     * @return string
-     */
-    public function getWitAIAnswer($message)
-    {
-        try {
-
-            $response = $this->witClient->get('/message', [
-                'q' => $message,
-            ]);
-
-            // Get the decoded body
-            $response = json_decode((string) $response->getBody(), true);
-            $intent   = $response['entities']['intent'][0]['value'] ?  ? 'no intent recognized';
-        } catch (\Exception $error) {
-            Log::warning($error->getMessage());
-        }
-
-        return 'The intent of the message: ' . $intent;
-    }
 }
