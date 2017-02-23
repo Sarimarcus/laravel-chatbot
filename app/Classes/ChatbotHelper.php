@@ -21,7 +21,7 @@ class ChatbotHelper
         $this->accessToken  = getenv('PAGE_ACCESS_TOKEN');
         $this->config       = include 'config.php';
         $this->chatbotAI    = new ChatbotAI($this->config);
-        $this->facebookAPI = new facebookAPI();
+        $this->facebookAPI = new FacebookAPI();
     }
 
     public function __isset($property)
