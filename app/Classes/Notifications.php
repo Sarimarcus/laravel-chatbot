@@ -13,7 +13,7 @@ class Notifications
     public static function send()
     {
         $accessToken = getenv('PAGE_ACCESS_TOKEN');
-        $content = "\uj&#x1F984;" .  " Spam system activated ! ";
+        $content = "\u{1F30F}" .  " Spam system activated ! ";
         $facebookAPI = new FacebookAPI();
 
         $users = User::all();
