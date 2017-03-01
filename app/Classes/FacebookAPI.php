@@ -1,13 +1,14 @@
 <?php
-
 namespace App\Classes;
 
 use Illuminate\Support\Facades\Log;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 
 class FacebookAPI
 {
 
-    protected $apiUrl        = 'https://graph.facebook.com/v2.8/me/messages';
+    protected $apiUrl = 'https://graph.facebook.com/v2.8/me/messages';
     protected $profileApiUrl = 'https://graph.facebook.com/v2.8/';
     protected $facebookPrepareData;
 
@@ -30,25 +31,18 @@ class FacebookAPI
         Log::info('Sending JSON to Facebook : ' . trim($jsonDataEncoded));
 
         $url = $this->apiUrl . '?access_token=' . $accessToken;
-        $ch  = curl_init($url);
 
-        // Tell cURL to send POST request.
-        curl_setopt($ch, CURLOPT_POST, 1);
-
-        // Attach JSON string to post fields.
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
-
-        // Set the content type
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
-        // Execute
-        curl_exec($ch);
-
-        if (curl_error($ch)) {
-            Log::warning('Send Facebook Curl error: ' . curl_error($ch));
+        try{
+            $client = new Client([
+                'headers' => ['Content-Type' => 'application/json']
+            ]);
+            $res = $client->request('POST', $url, ['body' => $jsonDataEncoded]);
+            echo $res->getBody();
+        } catch (BadResponseException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+            Log::warning('Send Facebook Guzzle error: ' . $responseBodyAsString);
         }
-
-        curl_close($ch);
     }
 
     /**
@@ -63,25 +57,18 @@ class FacebookAPI
         Log::info('Sending JSON to Facebook : ' . trim($jsonDataEncoded));
 
         $url = $this->apiUrl . '?access_token=' . $accessToken;
-        $ch  = curl_init($url);
-
-        // Tell cURL to send POST request.
-        curl_setopt($ch, CURLOPT_POST, 1);
-
-        // Attach JSON string to post fields.
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
-
-        // Set the content type
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
-        // Execute
-        curl_exec($ch);
-
-        if (curl_error($ch)) {
-            Log::warning('Send Facebook Curl error: ' . curl_error($ch));
+        
+        try{
+            $client = new Client([
+                'headers' => ['Content-Type' => 'application/json']
+            ]);
+            $res = $client->request('POST', $url, ['body' => $jsonDataEncoded]);
+            echo $res->getBody();
+        } catch (BadResponseException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+            Log::warning('Send Facebook Guzzle error: ' . $responseBodyAsString);
         }
-
-        curl_close($ch);
     }
 
     /**
@@ -92,22 +79,19 @@ class FacebookAPI
     public function userProfile(string $accessToken, string $senderId)
     {
         $url = $this->profileApiUrl . $senderId . '?access_token=' . $accessToken . '&fields=first_name,last_name,profile_pic,locale,timezone,gender';
-        $ch  = curl_init($url);
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        // Execute
-        $content = curl_exec($ch);
-
-        if (curl_error($ch)) {
-            Log::warning('Send Facebook Curl error: ' . curl_error($ch));
+       
+        try{
+            $client = new Client();
+            $res = $client->request('GET', $url);
+            $content = $res->getBody();
+        } catch (BadResponseException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+            Log::warning('Send Facebook Guzzle error: ' . $responseBodyAsString);
         }
-
-        curl_close($ch);
-
+        
         Log::info('Getting user info : ' . trim($content));
 
         return $content;
     }
-
 }

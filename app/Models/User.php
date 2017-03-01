@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+    protected $primaryKey = 'senderId';
+    
     /**
      * The attributes that are mass assignable.
      *
