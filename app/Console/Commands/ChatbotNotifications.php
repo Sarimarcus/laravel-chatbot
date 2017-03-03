@@ -3,6 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\PushToUser;
+use App\Models\User;
 
 class ChatbotNotifications extends Command
 {
@@ -37,6 +40,7 @@ class ChatbotNotifications extends Command
      */
     public function handle()
     {
-        \App\Classes\Notifications::send();
+        $users = User::all();
+        Notification::send($users, new PushToUser());
     }
 }

@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Model
 {
+    use Notifiable;
+    
     protected $primaryKey = 'senderId';
     
     /**
@@ -24,4 +27,14 @@ class User extends Model
      */
     protected $hidden = [
     ];
+    
+    /**
+     * Route notifications for the Facebook channel.
+     *
+     * @return int
+     */
+    public function routeNotificationForFacebook()
+    {
+        return $this->senderId;
+    }
 }
