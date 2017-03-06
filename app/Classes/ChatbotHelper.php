@@ -12,14 +12,12 @@ class ChatbotHelper
 
     private $accessToken;
 
-    public $config;
     public $user;
 
     public function __construct()
     {
         $this->accessToken  = getenv('PAGE_ACCESS_TOKEN');
-        $this->config       = include 'config.php';
-        $this->chatbotAI    = new ChatbotAI($this->config);
+        $this->chatbotAI    = new ChatbotAI();
         $this->facebookAPI = new FacebookAPI();
     }
 
@@ -211,7 +209,7 @@ class ChatbotHelper
         $hubVerifyToken = $request['hub_verify_token'];
         $hubChallenge   = $request['hub_challenge'];
 
-        if (isset($hubChallenge) && $hubVerifyToken == $this->config['webhook_verify_token']) {
+        if (isset($hubChallenge) && $hubVerifyToken == getenv('WEBHOOK_VERIFY_TOKEN')) {
 
             echo $hubChallenge;
         }

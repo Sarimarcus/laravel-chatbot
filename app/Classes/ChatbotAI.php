@@ -10,18 +10,15 @@ class ChatbotAI
 {
 
     protected $apiClient;
-    protected $config;
     protected $foreignExchangerate;
     protected $witClient;
 
     /**
      * ChatbotAI constructor.
-     * @param $config
      */
-    public function __construct($config)
+    public function __construct()
     {
-        $this->config    = $config;
-        $this->apiClient = new Client($this->config['apiai_token'], null, 'fr');
+        $this->apiClient = new Client(getenv('APIAI_TOKEN'), null, 'fr');
     }
 
     /**
