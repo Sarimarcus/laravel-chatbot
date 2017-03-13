@@ -38,10 +38,12 @@ class FacebookAPI
             ]);
             $res = $client->request('POST', $url, ['body' => $jsonDataEncoded]);
             echo $res->getBody();
+            return true;
         } catch (BadResponseException $e) {
             $response = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
             Log::warning('Send Facebook Guzzle error: ' . $responseBodyAsString);
+            return false;
         }
     }
 
@@ -64,10 +66,12 @@ class FacebookAPI
             ]);
             $res = $client->request('POST', $url, ['body' => $jsonDataEncoded]);
             echo $res->getBody();
+            return true;
         } catch (BadResponseException $e) {
             $response = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
             Log::warning('Send Facebook Guzzle error: ' . $responseBodyAsString);
+            return false;
         }
     }
 
