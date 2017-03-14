@@ -92,5 +92,4 @@ class ChatbotHelperTest extends TestCase
         $this->assertArrayHasKey("first_name", $response);
         
     }
-    
 }
