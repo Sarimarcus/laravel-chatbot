@@ -61,7 +61,7 @@ class ChatbotHelperTest extends TestCase
         $data = $this->chatbotAI->getApiAIAnswer($message, array(), array());
         $senderId = $this->input['entry'][0]['messaging'][0]['sender']['id'];
         
-        $response = $this->facebookAPI->send(getenv('PAGE_ACCESS_TOKEN'), $senderId, $data['content'], $data['type']);
+        $response = $this->facebookAPI->send((string)getenv('PAGE_ACCESS_TOKEN'), $senderId, $data['content'], $data['type']);
         $this->assertTrue($response);
     }
     
@@ -69,7 +69,7 @@ class ChatbotHelperTest extends TestCase
     {
         $senderId = $this->input['entry'][0]['messaging'][0]['sender']['id'];
         
-        $response = $this->facebookAPI->typingOn(getenv('PAGE_ACCESS_TOKEN'), $senderId);
+        $response = $this->facebookAPI->typingOn((string)getenv('PAGE_ACCESS_TOKEN'), $senderId);
         $this->assertTrue($response);
     }
     
@@ -77,7 +77,7 @@ class ChatbotHelperTest extends TestCase
     {
         $senderId = $this->input['entry'][0]['messaging'][0]['sender']['id'];
         
-        $user = $this->facebookAPI->userProfile(getenv('PAGE_ACCESS_TOKEN'), $senderId);
+        $user = $this->facebookAPI->userProfile((string)getenv('PAGE_ACCESS_TOKEN'), $senderId);
         $response = json_decode($user, true);
             
         $this->assertNotEmpty($response);
@@ -87,10 +87,9 @@ class ChatbotHelperTest extends TestCase
     {
         $senderId = $this->input['entry'][0]['messaging'][0]['sender']['id'];
         
-        $user = $this->facebookAPI->userProfile(getenv('PAGE_ACCESS_TOKEN'), $senderId);
+        $user = $this->facebookAPI->userProfile((string)getenv('PAGE_ACCESS_TOKEN'), $senderId);
         $response = json_decode($user, true);
         $this->assertArrayHasKey("first_name", $response);
         
     }
-    
 }
