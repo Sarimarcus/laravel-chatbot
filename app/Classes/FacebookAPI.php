@@ -1,14 +1,14 @@
 <?php
 namespace App\Classes;
 
-use Illuminate\Support\Facades\Log;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
+use Illuminate\Support\Facades\Log;
 
 class FacebookAPI
 {
 
-    protected $apiUrl = 'https://graph.facebook.com/v2.8/me/messages';
+    protected $apiUrl        = 'https://graph.facebook.com/v2.8/me/messages';
     protected $profileApiUrl = 'https://graph.facebook.com/v2.8/';
     protected $facebookPrepareData;
 
@@ -32,15 +32,15 @@ class FacebookAPI
 
         $url = $this->apiUrl . '?access_token=' . $accessToken;
 
-        try{
+        try {
             $client = new Client([
-                'headers' => ['Content-Type' => 'application/json']
+                'headers' => ['Content-Type' => 'application/json'],
             ]);
             $res = $client->request('POST', $url, ['body' => $jsonDataEncoded]);
             echo $res->getBody();
             return true;
         } catch (BadResponseException $e) {
-            $response = $e->getResponse();
+            $response             = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
             Log::warning('Send Facebook Guzzle error: ' . $responseBodyAsString);
             return false;
@@ -59,16 +59,16 @@ class FacebookAPI
         Log::info('Sending JSON to Facebook : ' . trim($jsonDataEncoded));
 
         $url = $this->apiUrl . '?access_token=' . $accessToken;
-        
-        try{
+
+        try {
             $client = new Client([
-                'headers' => ['Content-Type' => 'application/json']
+                'headers' => ['Content-Type' => 'application/json'],
             ]);
             $res = $client->request('POST', $url, ['body' => $jsonDataEncoded]);
             echo $res->getBody();
             return true;
         } catch (BadResponseException $e) {
-            $response = $e->getResponse();
+            $response             = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
             Log::warning('Send Facebook Guzzle error: ' . $responseBodyAsString);
             return false;
@@ -83,19 +83,23 @@ class FacebookAPI
     public function userProfile(string $accessToken, string $senderId)
     {
         $url = $this->profileApiUrl . $senderId . '?access_token=' . $accessToken . '&fields=first_name,last_name,profile_pic,locale,timezone,gender';
-       
-        try{
-            $client = new Client();
-            $res = $client->request('GET', $url);
+
+        try {
+            $client  = new Client();
+            $res     = $client->request('GET', $url);
             $content = $res->getBody();
         } catch (BadResponseException $e) {
-            $response = $e->getResponse();
+            $response             = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
             Log::warning('Send Facebook Guzzle error: ' . $responseBodyAsString);
         }
-        
-        Log::info('Getting user info : ' . trim($content));
 
-        return $content;
+        if (isset($content)) {
+            Log::info('Getting user info : ' . trim($content));
+            return $content;
+        } else {
+            return false;
+        }
+
     }
 }

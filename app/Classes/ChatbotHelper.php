@@ -16,8 +16,8 @@ class ChatbotHelper
 
     public function __construct()
     {
-        $this->accessToken  = getenv('PAGE_ACCESS_TOKEN');
-        $this->chatbotAI    = new ChatbotAI();
+        $this->accessToken = getenv('PAGE_ACCESS_TOKEN');
+        $this->chatbotAI   = new ChatbotAI();
         $this->facebookAPI = new FacebookAPI();
     }
 
@@ -117,9 +117,10 @@ class ChatbotHelper
     public function getUserProfile($senderId)
     {
         if (!isset($this->user)) {
-            $user = $this->facebookAPI->userProfile($this->accessToken, $senderId);
-            $data = json_decode($user, true);
-            $this->user = User::updateOrCreate(['senderId' => $senderId], $data);
+            if ($user = $this->facebookAPI->userProfile($this->accessToken, $senderId)) {
+                $data       = json_decode($user, true);
+                $this->user = User::updateOrCreate(['senderId' => $senderId], $data);
+            }
         }
     }
 
@@ -139,10 +140,11 @@ class ChatbotHelper
                 // Getting user profile
                 $this->getUserProfile($senderId);
                 if (isset($this->user)) {
-                    $firstname = $this->user['first_name'];
+                    return $content . ' ' . $this->user['first_name'] . ' !';
+                } else {
+                    return $content;
                 }
 
-                return $content . ' ' . $firstname . ' !';
                 break;
 
             default:
