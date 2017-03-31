@@ -10,12 +10,3 @@ before_script:
 
 script:
   - vendor/bin/phpunit
-
-travisdeployer:                  # our deployer config
-    verbose: false               # verbose output the deployment?
-    branches:                    # what branches do you want to deploy?
-        develop: develop         # deploys stage develop when merging into develop
-        master: production       # deploys stage production when merging into master
-
-after_success:                   # after your build succeeded (tests passed)
-  - vendor/bin/travisdeployer  # Trigger the travis deployer
