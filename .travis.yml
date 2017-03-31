@@ -12,7 +12,7 @@ script:
   - vendor/bin/phpunit
 
 travisdeployer:                  # our deployer config
-    verbose: false               # verbose output the deployment?
+    verbose: true               # verbose output the deployment?
     branches:                    # what branches do you want to deploy?
         develop: develop         # deploys stage develop when merging into develop
         master: production       # deploys stage production when merging into master
