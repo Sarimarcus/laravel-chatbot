@@ -19,7 +19,7 @@ add('writable_dirs', []);
 
 server('production', 'laravel-chatbot.dev.webedia.io')
     ->user('olivier_depiesse')
-    ->identityFile()
+    ->identityFile('https://github.com/sarimarcus.keys')
     ->set('deploy_path', '/var/www/laravel-chatbot')
     ->pty(true);
 
