@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4835d6e8e3144a7f4ca7ec46cdfa7949",
+    "content-hash": "0f5e2d2322387f8a95dea8fe96c2cfd2",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -562,61 +562,6 @@
                 "parser"
             ],
             "time": "2014-09-09T13:34:57+00:00"
-        },
-        {
-            "name": "enrise/travisdeployer",
-            "version": "v0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Enrise/TravisDeployer.git",
-                "reference": "c87d20c9a8cd16ea42c0d0af368c50ab016902bd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Enrise/TravisDeployer/zipball/c87d20c9a8cd16ea42c0d0af368c50ab016902bd",
-                "reference": "c87d20c9a8cd16ea42c0d0af368c50ab016902bd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "symfony/yaml": "^2.7"
-            },
-            "require-dev": {
-                "squizlabs/php_codesniffer": "2.*"
-            },
-            "bin": [
-                "script/travisdeployer"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Enrise\\TravisDeployer\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GNU v3"
-            ],
-            "authors": [
-                {
-                    "name": "Rick van der Staaij",
-                    "homepage": "http://rickvanderstaaij.nl",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Stefan van Essen",
-                    "homepage": "http://stefan-van-essen.nl",
-                    "role": "developer"
-                }
-            ],
-            "description": "Combine Deployer with Travis-CI to automatically deploy when a branch gets merged.",
-            "homepage": "https://github.com/Enrise/TravisDeployer",
-            "keywords": [
-                "deployer",
-                "travis",
-                "travis-ci"
-            ],
-            "time": "2015-09-25T07:33:08+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -1765,16 +1710,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.7",
+            "version": "4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "09e2277d14ea467e5a984010f501343ef29ffc69"
+                "reference": "ef7b2f56815df854e66ceaee8ebe9393ae36a40d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/09e2277d14ea467e5a984010f501343ef29ffc69",
-                "reference": "09e2277d14ea467e5a984010f501343ef29ffc69",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ef7b2f56815df854e66ceaee8ebe9393ae36a40d",
+                "reference": "ef7b2f56815df854e66ceaee8ebe9393ae36a40d",
                 "shasum": ""
             },
             "require": {
@@ -1824,7 +1769,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-01T09:12:17+00:00"
+            "time": "2017-04-02T07:44:40+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2014,16 +1959,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.17",
+            "version": "5.7.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "68752b665d3875f9a38a357e3ecb35c79f8673bf"
+                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/68752b665d3875f9a38a357e3ecb35c79f8673bf",
-                "reference": "68752b665d3875f9a38a357e3ecb35c79f8673bf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69c4f49ff376af2692bad9cebd883d17ebaa98a1",
+                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1",
                 "shasum": ""
             },
             "require": {
@@ -2092,7 +2037,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-19T16:52:12+00:00"
+            "time": "2017-04-03T02:22:27+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3704,16 +3649,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "dev-master",
+            "version": "v3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "bd17d508c08e7862f4a7630ce49eaff66237039e"
+                "reference": "093e416ad096355149e265ea2e4cc1f9ee40ab1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/bd17d508c08e7862f4a7630ce49eaff66237039e",
-                "reference": "bd17d508c08e7862f4a7630ce49eaff66237039e",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/093e416ad096355149e265ea2e4cc1f9ee40ab1a",
+                "reference": "093e416ad096355149e265ea2e4cc1f9ee40ab1a",
                 "shasum": ""
             },
             "require": {
@@ -3728,7 +3673,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.3-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -3755,7 +3700,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-30T07:16:02+00:00"
+            "time": "2017-03-07T16:47:02+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -5095,18 +5040,9 @@
             "time": "2017-02-24T13:58:52+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "2.7",
-            "alias_normalized": "2.7.0.0",
-            "version": "9999999-dev",
-            "package": "symfony/yaml"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "symfony/yaml": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

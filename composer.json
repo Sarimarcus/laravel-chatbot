@@ -12,9 +12,7 @@
         "laravel/tinker": "~1.0",
         "monolog/monolog": "^1.21",
         "phpunit/phpunit": "^5.5",
-        "vlucas/phpdotenv": "^2.3",
-        "enrise/travisdeployer": "^0.2",
-        "symfony/yaml": "dev-master as 2.7"
+        "vlucas/phpdotenv": "^2.3"
     },
     "require-dev": {
         "deployer/deployer": "^4.3",
