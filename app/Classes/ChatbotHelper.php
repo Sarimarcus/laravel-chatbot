@@ -16,7 +16,7 @@ class ChatbotHelper
 
     public function __construct()
     {
-        $this->accessToken = getenv('PAGE_ACCESS_TOKEN');
+        $this->accessToken = config('app.page_access_token');
         $this->chatbotAI   = new ChatbotAI();
         $this->facebookAPI = new FacebookAPI();
     }
@@ -33,7 +33,7 @@ class ChatbotHelper
      */
     public function getSenderId($input)
     {
-        return $input['entry'][0]['messaging'][0]['sender']['id'];
+        return isset($input['entry'][0]['messaging'][0]['sender']['id']) ? $input['entry'][0]['messaging'][0]['sender']['id'] : false;
     }
 
     /**
@@ -69,6 +69,16 @@ class ChatbotHelper
     }
 
     /**
+     * Check if the message is a postback
+     * @param $input
+     * @return bool
+     */
+    public function isPostback($input)
+    {
+        return isset($input['postback']);
+    }
+
+    /**
      * Get the answer to a given user's message
      * @param null $api
      * @param string $message
@@ -76,7 +86,6 @@ class ChatbotHelper
      */
     public function getAnswer($message, $api = null)
     {
-
         if ($api === 'apiai') {
             return $this->chatbotAI->getApiAIAnswer($message, $this->setContexts(), $this->setOriginalRequest());
         } elseif ($api === 'witai') {
@@ -90,24 +99,23 @@ class ChatbotHelper
 
     /**
      * Send a reply back to Facebook chat
-     * @param $senderId
      * @param $content
      * @param $type
+     * @param $action
      */
-    public function send($senderId, $content, $type, $action)
+    public function send($content, $type, $action)
     {
         // Apply some custom message
-        $content = $this->returnCustomMessage($senderId, $action, $content);
-        return $this->facebookAPI->send($this->accessToken, $senderId, $content, $type);
+        $content = $this->returnCustomMessage($action, $content);
+        return $this->facebookAPI->send($this->accessToken, $this->user['senderId'], $content, $type);
     }
 
     /**
      * Show typing indicators
-     * @param $senderId
      */
-    public function typingOn($senderId)
+    public function typingOn()
     {
-        return $this->facebookAPI->typingOn($this->accessToken, $senderId);
+        return $this->facebookAPI->typingOn($this->accessToken, $this->user['senderId']);
     }
 
     /**
@@ -126,21 +134,29 @@ class ChatbotHelper
 
     /**
      * Return custom message
-     * @param $senderId
      * @param $action
      * @param $content
      */
-    public function returnCustomMessage($senderId, $action, $content)
+    public function returnCustomMessage($action, $content)
     {
         switch ($action) {
 
             // Let's be polite and say hello with the firstname
-            case 'input.welcome':
+            case 'welcome':
 
-                // Getting user profile
-                $this->getUserProfile($senderId);
                 if (isset($this->user)) {
                     return $content . ' ' . $this->user['first_name'] . ' !';
+                } else {
+                    return $content;
+                }
+
+                break;
+
+            // Let's introduce the chatbot
+            case 'get_started':
+
+                if (isset($this->user)) {
+                    return $content . ' ' . $this->user['first_name'] . ' ! Je m\'appelle Laura, je peux t\'aider sur plusieurs sujets, comme par exemple te proposer des articles, ou t\'aider à trouver un nouveau look. Qu\'est-ce que tu peux préfères ?';
                 } else {
                     return $content;
                 }
@@ -211,7 +227,7 @@ class ChatbotHelper
         $hubVerifyToken = $request['hub_verify_token'];
         $hubChallenge   = $request['hub_challenge'];
 
-        if (isset($hubChallenge) && $hubVerifyToken == getenv('WEBHOOK_VERIFY_TOKEN')) {
+        if (isset($hubChallenge) && $hubVerifyToken == config('app.webhook_verify_token')) {
 
             echo $hubChallenge;
         }

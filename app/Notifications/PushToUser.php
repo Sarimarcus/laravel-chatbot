@@ -25,11 +25,11 @@ class PushToUser extends Notification
     public function toFacebook($notifiable)
     {
         try {
-            $accessToken = getenv('PAGE_ACCESS_TOKEN');
+            $accessToken = config('app.page_access_token');
             $facebookAPI = new FacebookAPI();
 
             $client = new Client();
-            $res = $client->request('GET', getenv('NOTIFICATION_WEBHOOK'));
+            $res = $client->request('GET', config('app.notification_webhook'));
             $content = $res->getBody();
 
             if (!empty($content)) {

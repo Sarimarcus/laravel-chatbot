@@ -18,24 +18,7 @@ class ChatbotAI
      */
     public function __construct()
     {
-        $this->apiClient = new Client(getenv('APIAI_TOKEN'), null, 'fr');
-    }
-
-    /**
-     * Get the answer to the user's message
-     * @param $message
-     * @return string
-     */
-    public function getAnswer(string $message)
-    {
-        // Simple example returning the user's message
-        return 'Define your own logic to reply to this message: ' . $message;
-
-        // Do whatever you like to analyze the message
-        // Example:
-        // if(preg_match('[hi|hey|hello]', strtolower($message))) {
-        // return 'Hi, nice to meet you!';
-        // }
+        $this->apiClient = new Client(config('app.apiai_token'), null, 'fr');
     }
 
     /**

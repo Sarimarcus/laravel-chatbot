@@ -1,0 +1,1 @@
+{greeting":[{"locale":"default","text":"{!! $message !!}"}]}

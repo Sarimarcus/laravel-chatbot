@@ -120,7 +120,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'errorlog'),
+    'log' => env('APP_LOG', 'daily'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -227,5 +227,33 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Facebook
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'webhook_verify_token' => env('WEBHOOK_VERIFY_TOKEN'),
+    'page_access_token' => env('PAGE_ACCESS_TOKEN'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Bot Platform
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'apiai_token' => env('APIAI_TOKEN'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Notifications
+    |--------------------------------------------------------------------------
+    |
+    */
+
+    'notification_webhook' => env('NOTIFICATION_WEBHOOK'),
 
 ];

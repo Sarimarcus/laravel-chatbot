@@ -13,7 +13,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\ChatbotNotifications::class
+        Commands\ChatbotNotifications::class,
+        Commands\ChatbotSetWelcomeMessage::class,
+        Commands\ChatbotAddDomainWhitelist::class,
+        Commands\ChatbotSetGetStartedButton::class
     ];
 
     /**

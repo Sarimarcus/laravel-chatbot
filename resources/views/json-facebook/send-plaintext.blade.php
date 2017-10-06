@@ -1,0 +1,1 @@
+{"recipient":{"id":"{{ $senderId }}"},"message":{"text":"{!! $content !!}"}}

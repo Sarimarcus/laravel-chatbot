@@ -6,5 +6,7 @@
 /.idea
 Homestead.json
 Homestead.yaml
-.env
+.env*
+.gitlab-ci.yml
+deploy.php
 /nbproject/

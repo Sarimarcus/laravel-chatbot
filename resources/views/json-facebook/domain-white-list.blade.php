@@ -1,0 +1,1 @@
+{"setting_type":"domain_whitelisting","whitelisted_domains":["{{ $domain }}"],"domain_action_type":"add"}
